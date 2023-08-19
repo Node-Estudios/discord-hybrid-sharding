@@ -41,10 +41,10 @@ export async function fetchRecommendedShards(token: string, guildsPerShard = 100
         method: 'GET',
         headers: { Authorization: `Bot ${token.replace(/^Bot\s*/i, '')}` },
     })
-        .then(res => {
+        .then((res: any) => {
             if (res.ok) return res.json() as Promise<{ shards: number }>;
             if (res.status === 401) throw new Error('DISCORD_TOKEN_INVALID');
             throw res;
         })
-        .then(data => data.shards * (1000 / guildsPerShard));
+        .then((data: any) => data.shards * (1000 / guildsPerShard));
 }
